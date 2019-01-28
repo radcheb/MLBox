@@ -6,26 +6,27 @@ from setuptools import setup
 from setuptools.command.install import install
 
 requirements = [
-    "numpy==1.13.0",
-    "matplotlib==2.0.2",
+    "numpy==1.15.1",
+    "matplotlib==3.0.1",
     "hyperopt==0.1",
-    "Keras==2.0.4",
-    "pandas==0.20.3",
-    "joblib==0.11",
-    "scikit-learn==0.19.0",
-    "Theano==0.9.0",
-    "xgboost==0.6a2",
-    "lightgbm==2.0.2", 
-    "networkx==1.11"
+    "Keras==2.2.2",
+    "pandas==0.23.4",
+    "joblib==0.13",
+    "scikit-learn==0.20.1",
+    "Theano==1.0.3",
+    "xgboost==0.81",
+    "lightgbm==2.2.2", 
+    "networkx==2.2"
 ]
-
+requirements=[]
 class OverrideInstallCommand(install):
     def run(self):
         # Install all requirements
         failed = []
 
         for req in requirements:
-            if pip.main(["install", req]) == 1:
+            from pip._internal import main
+            if main(["install", req]) == 1:
                 failed.append(req)
 
         if len(failed) > 0:
